@@ -13,7 +13,7 @@ public partial class AppointmentSlot
 
     public int DurationInMinutes { get; set; }
 
-    public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+    public virtual Appointment? Appointment { get; set; }
 
     public virtual Clinic Clinic { get; set; } = null!;
 

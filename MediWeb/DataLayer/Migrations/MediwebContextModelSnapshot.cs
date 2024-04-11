@@ -75,7 +75,8 @@ namespace DataLayer.Migrations
                     b.HasKey("Id")
                         .HasName("appointment_pkey");
 
-                    b.HasIndex("AppointmentSlotId");
+                    b.HasIndex("AppointmentSlotId")
+                        .IsUnique();
 
                     b.HasIndex("PatientId");
 
@@ -347,10 +348,10 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("Data.EntityModels.Appointment", b =>
                 {
                     b.HasOne("Data.EntityModels.AppointmentSlot", "AppointmentSlot")
-                        .WithMany("Appointments")
-                        .HasForeignKey("AppointmentSlotId")
-                        .IsRequired()
-                        .HasConstraintName("appointment_appointment_slot_fkey");
+                        .WithOne("Appointment")
+                        .HasForeignKey("Data.EntityModels.Appointment", "AppointmentSlotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Data.EntityModels.Patient", "Patient")
                         .WithMany("Appointments")
@@ -452,7 +453,7 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("Data.EntityModels.AppointmentSlot", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Appointment");
                 });
 
             modelBuilder.Entity("Data.EntityModels.Clinic", b =>

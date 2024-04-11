@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Data.EntityModels;
-using Microsoft.Extensions.Configuration;
 
 namespace Data;
 
@@ -75,11 +74,6 @@ public partial class MediwebContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("note");
             entity.Property(e => e.PatientId).HasColumnName("patient_id");
-
-            entity.HasOne(d => d.AppointmentSlot).WithMany(p => p.Appointments)
-                .HasForeignKey(d => d.AppointmentSlotId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("appointment_appointment_slot_fkey");
 
             entity.HasOne(d => d.Patient).WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.PatientId)
