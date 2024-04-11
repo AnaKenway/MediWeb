@@ -1,6 +1,6 @@
 ﻿using static Common.Enums;
 
-namespace Data.Models;
+namespace Data.EntityModels;
 
 public partial class UserAccount
 {
@@ -18,13 +18,11 @@ public partial class UserAccount
 
     public string Password { get; set; } = null!;
 
-    //We don't actually need to reference this,
-    //however these classes should have a reference to UserAccount
-    //public virtual Admin Admin { get; set; } = null!;
+    public virtual Admin? Admin { get; set; }
 
-    //public virtual Doctor Doctor { get; set; } = null!;
+    public virtual Doctor? Doctor { get; set; }
 
-    //public virtual MedicalStaff MedicalStaff { get; set; } = null!;
+    public virtual MedicalStaff? MedicalStaff { get; set; }
 
-    //public virtual Patient Patient { get; set; } = null!;
+    public virtual Patient? Patient { get; set; }
 }

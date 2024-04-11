@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Data.Models;
+namespace Data.EntityModels;
 
 public partial class Appointment
 {
@@ -16,5 +16,5 @@ public partial class Appointment
 
     public virtual AppointmentSlot AppointmentSlot { get; set; } = null!;
 
-    public virtual Patient Patient { get; set; } = null!;   
+    public virtual Patient Patient { get; set; } = null!;
 }

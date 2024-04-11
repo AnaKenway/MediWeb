@@ -1,17 +1,18 @@
-﻿using Data.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Data.EntityModels;
 using Microsoft.Extensions.Configuration;
 
 namespace Data;
 
 public partial class MediwebContext : DbContext
 {
-    private readonly IConfiguration _configuration;
+    public MediwebContext()
+    {
+    }
 
-    public MediwebContext(DbContextOptions<MediwebContext> options, IConfiguration configuration)
+    public MediwebContext(DbContextOptions<MediwebContext> options)
         : base(options)
     {
-        _configuration = configuration;
     }
 
     public virtual DbSet<Admin> Admins { get; set; }
@@ -34,9 +35,6 @@ public partial class MediwebContext : DbContext
 
     public virtual DbSet<UserAccount> UserAccounts { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-       => optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnectionString"));
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Admin>(entity =>
@@ -45,6 +43,8 @@ public partial class MediwebContext : DbContext
 
             entity.ToTable("admin");
 
+            entity.HasIndex(e => e.UserAccountId, "admin_user_account_id_key").IsUnique();
+
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
@@ -52,7 +52,7 @@ public partial class MediwebContext : DbContext
             entity.Property(e => e.UserAccountId).HasColumnName("user_account_id");
 
             entity.HasOne(d => d.UserAccount).WithOne(p => p.Admin)
-                .HasForeignKey<UserAccount>(d => d.Id)
+                .HasForeignKey<Admin>(d => d.UserAccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("admin_user_account_fkey");
         });
@@ -68,6 +68,7 @@ public partial class MediwebContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.AppointmentSlotId).HasColumnName("appointment_slot_id");
             entity.Property(e => e.IsApproved)
+                .HasDefaultValueSql("(0)::bit(1)")
                 .HasColumnType("bit(1)")
                 .HasColumnName("is_approved");
             entity.Property(e => e.Note)
@@ -77,10 +78,12 @@ public partial class MediwebContext : DbContext
 
             entity.HasOne(d => d.AppointmentSlot).WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.AppointmentSlotId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("appointment_appointment_slot_fkey");
 
             entity.HasOne(d => d.Patient).WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.PatientId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("appointment_patient_fkey");
         });
 
@@ -100,10 +103,12 @@ public partial class MediwebContext : DbContext
 
             entity.HasOne(d => d.Clinic).WithMany(p => p.AppointmentSlots)
                 .HasForeignKey(d => d.ClinicId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("appointment_slot_clinic_fkey");
 
             entity.HasOne(d => d.Doctor).WithMany(p => p.AppointmentSlots)
                 .HasForeignKey(d => d.DoctorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("appointment_slot_doctor_fkey");
         });
 
@@ -132,7 +137,7 @@ public partial class MediwebContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("pib");
             entity.Property(e => e.WorkHours)
-                .HasMaxLength(50)
+                .HasMaxLength(200)
                 .HasColumnName("work_hours");
         });
 
@@ -141,6 +146,8 @@ public partial class MediwebContext : DbContext
             entity.HasKey(e => e.Id).HasName("doctor_pkey");
 
             entity.ToTable("doctor");
+
+            entity.HasIndex(e => e.UserAccountId, "doctor_user_account_id_key").IsUnique();
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -151,7 +158,7 @@ public partial class MediwebContext : DbContext
             entity.Property(e => e.UserAccountId).HasColumnName("user_account_id");
 
             entity.HasOne(d => d.UserAccount).WithOne(p => p.Doctor)
-                .HasForeignKey<UserAccount>(d => d.Id)
+                .HasForeignKey<Doctor>(d => d.UserAccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("doctor_user_account_fkey");
         });
@@ -191,18 +198,21 @@ public partial class MediwebContext : DbContext
 
             entity.ToTable("medical_staff");
 
+            entity.HasIndex(e => e.UserAccountId, "medical_staff_user_account_id_key").IsUnique();
+
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.ClinicId).HasColumnName("clinic_id");
             entity.Property(e => e.UserAccountId).HasColumnName("user_account_id");
 
-            entity.HasOne(d => d.Clinic).WithMany(p => p.MedicalStaffs)
+            entity.HasOne(d => d.Clinic).WithMany(p => p.MedicalStaff)
                 .HasForeignKey(d => d.ClinicId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("medical_staff_clinic_fkey");
 
             entity.HasOne(d => d.UserAccount).WithOne(p => p.MedicalStaff)
-                .HasForeignKey<UserAccount>(d => d.Id)
+                .HasForeignKey<MedicalStaff>(d => d.UserAccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("medical_staff_user_account_fkey");
         });
@@ -212,6 +222,8 @@ public partial class MediwebContext : DbContext
             entity.HasKey(e => e.Id).HasName("patient_pkey");
 
             entity.ToTable("patient");
+
+            entity.HasIndex(e => e.UserAccountId, "patient_user_account_id_key").IsUnique();
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -229,7 +241,8 @@ public partial class MediwebContext : DbContext
             entity.Property(e => e.UserAccountId).HasColumnName("user_account_id");
 
             entity.HasOne(d => d.UserAccount).WithOne(p => p.Patient)
-                .HasForeignKey<UserAccount>(d => d.Id)
+                .HasForeignKey<Patient>(d => d.UserAccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("patient_user_account_fkey");
         });
 

@@ -1,5 +1,5 @@
 ﻿
-namespace Data.Models;
+namespace Data.EntityModels;
 
 public partial class MedicalStaff
 {

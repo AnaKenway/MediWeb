@@ -1,6 +1,6 @@
 ﻿using static Common.Enums;
 
-namespace Data.Models;
+namespace Data.EntityModels;
 
 public partial class Patient
 {
@@ -18,5 +18,5 @@ public partial class Patient
 
     public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
-    public virtual UserAccount UserAccount { get; set; } = null!;   
+    public virtual UserAccount UserAccount { get; set; } = null!;
 }

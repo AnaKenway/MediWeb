@@ -1,5 +1,5 @@
 ﻿
-namespace Data.Models;
+namespace Data.EntityModels;
 
 public partial class Clinic
 {
@@ -21,5 +21,5 @@ public partial class Clinic
 
     public virtual ICollection<DoctorWorksAtClinic> DoctorWorksAtClinics { get; set; } = new List<DoctorWorksAtClinic>();
 
-    public virtual ICollection<MedicalStaff> MedicalStaffs { get; set; } = new List<MedicalStaff>();
+    public virtual ICollection<MedicalStaff> MedicalStaff { get; set; } = new List<MedicalStaff>();
 }

@@ -1,6 +1,6 @@
 ﻿using static Common.Enums;
 
-namespace Data.Models;
+namespace Data.EntityModels;
 
 public partial class Admin
 {
