@@ -1,45 +1,13 @@
-﻿using Data;
-using Data.EntityModels;
+﻿using DataLayer;
+using DataLayer.EntityModels;
 
 namespace DataLayer.Repository
 {
-    public class SpecializationRepository : ISpecializationRepository
+    public class SpecializationRepository : BaseRepository<Specialization>, ISpecializationRepository
     {
-        private MediwebContext _context;
-
         public SpecializationRepository(MediwebContext context)
+            :base(context)
         {
-            _context = context;
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Specialization> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Specialization GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Specialization Insert(Specialization entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Specialization Update(Specialization entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

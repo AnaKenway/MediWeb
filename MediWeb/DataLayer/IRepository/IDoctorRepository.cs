@@ -1,4 +1,4 @@
-﻿using Data.EntityModels;
+﻿using DataLayer.EntityModels;
 
 namespace DataLayer.Repository
 {

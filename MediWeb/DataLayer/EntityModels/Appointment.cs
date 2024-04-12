@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Data.EntityModels;
+namespace DataLayer.EntityModels;
 
 public partial class Appointment
 {

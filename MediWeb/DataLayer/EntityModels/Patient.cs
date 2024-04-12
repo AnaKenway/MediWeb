@@ -1,6 +1,6 @@
-﻿using static Common.Enums;
+﻿using Common;
 
-namespace Data.EntityModels;
+namespace DataLayer.EntityModels;
 
 public partial class Patient
 {

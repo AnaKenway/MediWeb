@@ -1,45 +1,13 @@
-﻿using Data;
-using Data.EntityModels;
+﻿using DataLayer;
+using DataLayer.EntityModels;
 
 namespace DataLayer.Repository
 {
-    public class DoctorWorksAtClinicRepository : IDoctorWorksAtClinicRepository
+    public class DoctorWorksAtClinicRepository : BaseRepository<DoctorWorksAtClinic>, IDoctorWorksAtClinicRepository
     {
-        private MediwebContext _context;
-
         public DoctorWorksAtClinicRepository(MediwebContext context)
+            :base(context)
         {
-            _context = context;
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<DoctorWorksAtClinic> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public DoctorWorksAtClinic GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DoctorWorksAtClinic Insert(DoctorWorksAtClinic entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public DoctorWorksAtClinic Update(DoctorWorksAtClinic entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

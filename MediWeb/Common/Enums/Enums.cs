@@ -2,8 +2,6 @@
 
 namespace Common
 {
-    public static class Enums
-    {
         public enum AdminType
         {
             AppAdmin = 0,
@@ -25,5 +23,4 @@ namespace Common
             MedicalStaff = 2,
             Patient = 3
         }
-    }
 }

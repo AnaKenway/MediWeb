@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Data.EntityModels;
+using DataLayer.EntityModels;
 
-namespace Data;
+namespace DataLayer;
 
 public partial class MediwebContext : DbContext
 {

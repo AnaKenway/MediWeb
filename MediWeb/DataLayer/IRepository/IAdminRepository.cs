@@ -1,5 +1,5 @@
-﻿using static Common.Enums;
-using Data.EntityModels;
+﻿using Common;
+using DataLayer.EntityModels;
 
 namespace DataLayer.Repository
 {

@@ -1,53 +1,20 @@
-﻿using Data;
-using Data.EntityModels;
+﻿using DataLayer.EntityModels;
 
 namespace DataLayer.Repository
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class AppointmentRepository : BaseRepository<Appointment>, IAppointmentRepository
     {
-        private MediwebContext _context;
-
         public AppointmentRepository(MediwebContext context)
+            :base(context)
         {
-            _context = context;
         }
 
-        public bool ApproveAppointment(long appointmentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
+        public async Task<bool> ApproveAppointment(long appointmentId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Appointment> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Appointment GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Appointment Insert(Appointment entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RejectAppointment(long appointmentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Appointment Update(Appointment entity)
+        public async Task<bool> RejectAppointment(long appointmentId)
         {
             throw new NotImplementedException();
         }
