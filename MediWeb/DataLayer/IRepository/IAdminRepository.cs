@@ -1,10 +1,9 @@
 ﻿using Common;
 using DataLayer.EntityModels;
 
-namespace DataLayer.Repository
+namespace DataLayer.Repository;
+
+public interface IAdminRepository : IBaseRepository<Admin>
 {
-    public interface IAdminRepository : IBaseRepository<Admin>
-    {
-        public void ChangeAdminType(long adminId, AdminType newAdminTyoe);
-    }
+    public void ChangeAdminType(long adminId, AdminType newAdminTyoe);
 }

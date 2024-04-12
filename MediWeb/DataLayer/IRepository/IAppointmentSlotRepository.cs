@@ -1,8 +1,7 @@
 ﻿using DataLayer.EntityModels;
 
-namespace DataLayer.Repository
+namespace DataLayer.Repository;
+
+public interface IAppointmentSlotRepository :IBaseRepository<AppointmentSlot>
 {
-    public interface IAppointmentSlotRepository :IBaseRepository<AppointmentSlot>
-    {
-    }
 }

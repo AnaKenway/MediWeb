@@ -1,8 +1,7 @@
 ﻿using DataLayer.EntityModels;
 
-namespace DataLayer.Repository
+namespace DataLayer.Repository;
+
+public interface ISpecializationRepository : IBaseRepository<Specialization>
 {
-    public interface ISpecializationRepository : IBaseRepository<Specialization>
-    {
-    }
 }

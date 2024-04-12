@@ -1,10 +1,9 @@
 ﻿using DataLayer.EntityModels;
 
-namespace DataLayer.Repository
+namespace DataLayer.Repository;
+
+public interface IAppointmentRepository :IBaseRepository<Appointment>
 {
-    public interface IAppointmentRepository :IBaseRepository<Appointment>
-    {
-        public Task<bool> ApproveAppointment(long appointmentId);
-        public Task<bool> RejectAppointment(long appointmentId);
-    }
+    public Task<bool> ApproveAppointment(long appointmentId);
+    public Task<bool> RejectAppointment(long appointmentId);
 }
