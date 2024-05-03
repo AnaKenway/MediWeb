@@ -5,7 +5,7 @@ namespace DataLayer.Repository
 {
     public class DoctorRepository : BaseRepository<Doctor>, IDoctorRepository
     {
-        public DoctorRepository(MediwebContext context)
+        public DoctorRepository(MediWebContext context)
             :base(context)
         {
         }    

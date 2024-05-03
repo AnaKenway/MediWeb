@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorComponents();
 
 //Add DBContext
-builder.Services.AddDbContext<MediwebContext>(options =>
+builder.Services.AddDbContext<MediWebContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 var app = builder.Build();

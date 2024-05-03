@@ -3,9 +3,9 @@ namespace DataLayer.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        protected readonly MediwebContext _context;
+        protected readonly MediWebContext _context;
 
-        public BaseRepository(MediwebContext context) 
+        public BaseRepository(MediWebContext context) 
         {
             _context = context;
         }
@@ -20,12 +20,12 @@ namespace DataLayer.Repository
             throw new NotImplementedException();
         }
 
-        public virtual T GetById(int id)
+        public virtual T GetById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async Task<T> GetByIdAsync(string name)
+        public virtual async Task<T> GetByIdAsync(long name)
         {
             throw new NotImplementedException();
         }
@@ -68,12 +68,12 @@ namespace DataLayer.Repository
         {
             throw new NotImplementedException();
         }
-        public virtual void Delete(int id)
+        public virtual void Delete(long id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async void DeleteAsync(int id)
+        public virtual async Task DeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
@@ -83,12 +83,17 @@ namespace DataLayer.Repository
             throw new NotImplementedException();
         }
 
-        public virtual async void BulkDeleteAsync(IEnumerable<T> entities)
+        public virtual async Task BulkDeleteAsync(IEnumerable<T> entities)
         {
             throw new NotImplementedException();
         }             
 
         public virtual void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual async Task SaveAsync()
         {
             throw new NotImplementedException();
         }

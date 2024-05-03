@@ -4,7 +4,7 @@ namespace DataLayer.Repository
 {
     public class AppointmentRepository : BaseRepository<Appointment>, IAppointmentRepository
     {
-        public AppointmentRepository(MediwebContext context)
+        public AppointmentRepository(MediWebContext context)
             :base(context)
         {
         }

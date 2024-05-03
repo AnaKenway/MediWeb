@@ -4,7 +4,7 @@ namespace DataLayer;
 
 public class UnitOfWork : IDisposable
 {
-    private MediwebContext _context;
+    private MediWebContext _context;
     private AdminRepository? adminRepository;
     private AppointmentRepository? appointmentRepository;
     private AppointmentSlotRepository? appointmentSlotRepository;
@@ -17,7 +17,7 @@ public class UnitOfWork : IDisposable
     private UserAccountRepository? userAccountRepository;
     private bool disposedValue;
    
-    public UnitOfWork(MediwebContext context)
+    public UnitOfWork(MediWebContext context)
     {
         _context = context;
     }

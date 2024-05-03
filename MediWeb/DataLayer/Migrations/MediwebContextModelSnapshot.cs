@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DataLayer.Migrations
 {
-    [DbContext(typeof(MediwebContext))]
+    [DbContext(typeof(MediWebContext))]
     partial class MediwebContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

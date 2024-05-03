@@ -3,13 +3,13 @@ using DataLayer.EntityModels;
 
 namespace DataLayer;
 
-public partial class MediwebContext : DbContext
+public partial class MediWebContext : DbContext
 {
-    public MediwebContext()
+    public MediWebContext()
     {
     }
 
-    public MediwebContext(DbContextOptions<MediwebContext> options)
+    public MediWebContext(DbContextOptions<MediWebContext> options)
         : base(options)
     {
     }

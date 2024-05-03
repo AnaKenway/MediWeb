@@ -5,7 +5,7 @@ namespace DataLayer.Repository
 {
     public class UserAccountRepository : BaseRepository<UserAccount>, IUserAccountRepository
     {
-        public UserAccountRepository(MediwebContext context)
+        public UserAccountRepository(MediWebContext context)
             : base(context)
         {
         }
