@@ -34,9 +34,9 @@ public class ClinicService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteClinicAsync(long id)
+    public async Task DeleteClinicAsync(Clinic clinic)
     {
-        await _unitOfWork.ClinicRepository.DeleteAsync(id);
+        await _unitOfWork.ClinicRepository.DeleteAsync(clinic);
         await _unitOfWork.SaveAsync();
 
     }

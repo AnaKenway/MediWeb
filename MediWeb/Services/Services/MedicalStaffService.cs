@@ -34,9 +34,9 @@ public class MedicalStaffService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteMedicalStaffAsync(long id)
+    public async Task DeleteMedicalStaffAsync(MedicalStaff medicalStaff)
     {
-        await _unitOfWork.MedicalStaffRepository.DeleteAsync(id);
+        await _unitOfWork.MedicalStaffRepository.DeleteAsync(medicalStaff);
         await _unitOfWork.SaveAsync();
 
     }

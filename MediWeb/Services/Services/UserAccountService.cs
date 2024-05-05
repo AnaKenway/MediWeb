@@ -34,9 +34,9 @@ public class UserAccountService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteUserAccountAsync(long id)
+    public async Task DeleteUserAccountAsync(UserAccount userAccount)
     {
-        await _unitOfWork.UserAccountRepository.DeleteAsync(id);
+        await _unitOfWork.UserAccountRepository.DeleteAsync(userAccount);
         await _unitOfWork.SaveAsync();
 
     }

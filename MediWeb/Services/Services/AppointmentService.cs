@@ -34,9 +34,9 @@ public class AppointmentService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteAppointmentAsync(long id)
+    public async Task DeleteAppointmentAsync(Appointment appointment)
     {
-        await _unitOfWork.AppointmentRepository.DeleteAsync(id);
+        await _unitOfWork.AppointmentRepository.DeleteAsync(appointment);
         await _unitOfWork.SaveAsync();
 
     }

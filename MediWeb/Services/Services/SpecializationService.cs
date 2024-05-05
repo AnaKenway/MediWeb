@@ -34,9 +34,9 @@ public class SpecializationService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteSpecializationAsync(long id)
+    public async Task DeleteSpecializationAsync(Specialization specialization)
     {
-        await _unitOfWork.SpecializationRepository.DeleteAsync(id);
+        await _unitOfWork.SpecializationRepository.DeleteAsync(specialization);
         await _unitOfWork.SaveAsync();
 
     }

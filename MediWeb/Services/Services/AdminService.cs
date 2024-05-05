@@ -34,9 +34,9 @@ public class AdminService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteAdminAsync(long id)
+    public async Task DeleteAdminAsync(Admin admin)
     {
-        await _unitOfWork.AdminRepository.DeleteAsync(id);
+        await _unitOfWork.AdminRepository.DeleteAsync(admin);
         await _unitOfWork.SaveAsync();
 
     }

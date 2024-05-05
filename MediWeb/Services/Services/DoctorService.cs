@@ -34,9 +34,9 @@ public class DoctorService
         await _unitOfWork.SaveAsync();
     }
 
-    public async Task DeleteDoctorAsync(long id)
+    public async Task DeleteDoctorAsync(Doctor doctor)
     {
-        await _unitOfWork.DoctorRepository.DeleteAsync(id);
+        await _unitOfWork.DoctorRepository.DeleteAsync(doctor);
         await _unitOfWork.SaveAsync();
 
     }
