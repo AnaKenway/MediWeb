@@ -22,22 +22,18 @@ public class MedicalStaffService
         return await _unitOfWork.MedicalStaffRepository.GetByIdAsync(id);
     }
 
-    public async Task AddMedicalStaffAsync(MedicalStaff medicalStaff)
+    public async Task<MedicalStaff> AddMedicalStaffAsync(MedicalStaff medicalStaff)
     {
-        await _unitOfWork.MedicalStaffRepository.InsertAsync(medicalStaff);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.MedicalStaffRepository.InsertAsync(medicalStaff);
     }
 
-    public async Task UpdateMedicalStaffAsync(MedicalStaff medicalStaff)
+    public async Task<MedicalStaff> UpdateMedicalStaffAsync(MedicalStaff medicalStaff)
     {
-        await _unitOfWork.MedicalStaffRepository.UpdateAsync(medicalStaff);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.MedicalStaffRepository.UpdateAsync(medicalStaff);
     }
 
     public async Task DeleteMedicalStaffAsync(MedicalStaff medicalStaff)
     {
         await _unitOfWork.MedicalStaffRepository.DeleteAsync(medicalStaff);
-        await _unitOfWork.SaveAsync();
-
     }
 }

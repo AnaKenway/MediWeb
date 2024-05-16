@@ -1,6 +1,4 @@
-﻿using Common;
-using DataLayer;
-using DataLayer.EntityModels;
+﻿using DataLayer.EntityModels;
 
 namespace DataLayer.Repository
 {
@@ -9,11 +7,6 @@ namespace DataLayer.Repository
         public AdminRepository(MediWebContext context)
             :base(context)
         {
-        }
-
-        public void ChangeAdminType(long adminId, AdminType newAdminTyoe)
-        {
-            throw new NotImplementedException();
-        }       
+        }          
     }
 }

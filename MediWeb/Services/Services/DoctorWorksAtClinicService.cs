@@ -17,22 +17,19 @@ public class DoctorWorksAtClinicService
         return await _unitOfWork.DoctorWorksAtClinicRepository.GetAllAsync();
     }
 
-    public async Task AddDoctorWorksAtClinicAsync(DoctorWorksAtClinic doctorWorksAtClinic)
+    public async Task<DoctorWorksAtClinic> AddDoctorWorksAtClinicAsync(DoctorWorksAtClinic doctorWorksAtClinic)
     {
-        await _unitOfWork.DoctorWorksAtClinicRepository.InsertAsync(doctorWorksAtClinic);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.DoctorWorksAtClinicRepository.InsertAsync(doctorWorksAtClinic);
     }
 
-    public async Task UpdateDoctorWorksAtClinicAsync(DoctorWorksAtClinic doctorWorksAtClinic)
+    public async Task<DoctorWorksAtClinic> UpdateDoctorWorksAtClinicAsync(DoctorWorksAtClinic doctorWorksAtClinic)
     {
-        await _unitOfWork.DoctorWorksAtClinicRepository.UpdateAsync(doctorWorksAtClinic);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.DoctorWorksAtClinicRepository.UpdateAsync(doctorWorksAtClinic);
     }
 
     public async Task DeleteDoctorWorksAtClinicAsync(long doctorId, long clinicId)
     {
         await _unitOfWork.DoctorWorksAtClinicRepository.DeleteAsync(doctorId, clinicId);
-        await _unitOfWork.SaveAsync();
     }
 
     /// <summary>
@@ -43,7 +40,7 @@ public class DoctorWorksAtClinicService
     /// <exception cref="NotImplementedException"></exception>
     public async Task<IEnumerable<Doctor>> GetAllDoctorsFromClinicByIdAsync(long clinicId)
     {
-        throw new NotImplementedException();
+        return await _unitOfWork.DoctorWorksAtClinicRepository.GetAllDoctorsWhoWorkAtClinicByIdAsync(clinicId);
     }
 
     /// <summary>
@@ -54,6 +51,6 @@ public class DoctorWorksAtClinicService
     /// <returns></returns>
     public async Task<IEnumerable<Clinic>> GetAllClinicsWithDoctorByIdAsync(long doctorId)
     {
-        throw new NotImplementedException();
+        return await _unitOfWork.DoctorWorksAtClinicRepository.GetAllClinicWhereDoctorWorksByIdAsync(doctorId);
     }
 }

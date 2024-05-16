@@ -22,22 +22,18 @@ public class UserAccountService
         return await _unitOfWork.UserAccountRepository.GetByIdAsync(id);
     }
 
-    public async Task AddUserAccountAsync(UserAccount userAccount)
+    public async Task<UserAccount> AddUserAccountAsync(UserAccount userAccount)
     {
-        await _unitOfWork.UserAccountRepository.InsertAsync(userAccount);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.UserAccountRepository.InsertAsync(userAccount);
     }
 
-    public async Task UpdateUserAccountAsync(UserAccount userAccount)
+    public async Task<UserAccount> UpdateUserAccountAsync(UserAccount userAccount)
     {
-        await _unitOfWork.UserAccountRepository.UpdateAsync(userAccount);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.UserAccountRepository.UpdateAsync(userAccount);
     }
 
     public async Task DeleteUserAccountAsync(UserAccount userAccount)
     {
         await _unitOfWork.UserAccountRepository.DeleteAsync(userAccount);
-        await _unitOfWork.SaveAsync();
-
     }
 }

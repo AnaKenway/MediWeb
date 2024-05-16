@@ -22,22 +22,18 @@ public class ClinicService
         return await _unitOfWork.ClinicRepository.GetByIdAsync(id);
     }
 
-    public async Task AddClincAsync(Clinic clinic)
+    public async Task<Clinic> AddClincAsync(Clinic clinic)
     {
-        await _unitOfWork.ClinicRepository.InsertAsync(clinic);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.ClinicRepository.InsertAsync(clinic);
     }
 
-    public async Task UpdateClinicAsync(Clinic clinic)
+    public async Task<Clinic> UpdateClinicAsync(Clinic clinic)
     {
-        await _unitOfWork.ClinicRepository.UpdateAsync(clinic);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.ClinicRepository.UpdateAsync(clinic);
     }
 
     public async Task DeleteClinicAsync(Clinic clinic)
     {
         await _unitOfWork.ClinicRepository.DeleteAsync(clinic);
-        await _unitOfWork.SaveAsync();
-
     }
 }

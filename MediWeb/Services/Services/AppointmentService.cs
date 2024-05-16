@@ -12,6 +12,11 @@ public class AppointmentService
         _unitOfWork = unitOfWork;
     }
 
+    public IEnumerable<Appointment> GetAllAppointments()
+    {
+        return _unitOfWork.AppointmentRepository.GetAll();
+    }
+
     public async Task<IEnumerable<Appointment>> GetAllAppointmentsAsync()
     {
         return await _unitOfWork.AppointmentRepository.GetAllAsync();
@@ -22,22 +27,18 @@ public class AppointmentService
         return await _unitOfWork.AppointmentRepository.GetByIdAsync(id);
     }
 
-    public async Task AddAppointmentAsync(Appointment appointment)
+    public async Task<Appointment> AddAppointmentAsync(Appointment appointment)
     {
-        await _unitOfWork.AppointmentRepository.InsertAsync(appointment);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.AppointmentRepository.InsertAsync(appointment);
     }
 
-    public async Task UpdateAppointmentAsync(Appointment appointment)
+    public async Task<Appointment> UpdateAppointmentAsync(Appointment appointment)
     {
-        await _unitOfWork.AppointmentRepository.UpdateAsync(appointment);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.AppointmentRepository.UpdateAsync(appointment);
     }
 
     public async Task DeleteAppointmentAsync(Appointment appointment)
     {
         await _unitOfWork.AppointmentRepository.DeleteAsync(appointment);
-        await _unitOfWork.SaveAsync();
-
     }
 }

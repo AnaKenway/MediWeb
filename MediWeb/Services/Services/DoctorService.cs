@@ -22,16 +22,14 @@ public class DoctorService
         return await _unitOfWork.DoctorRepository.GetByIdAsync(id);
     }
 
-    public async Task AddDoctorAsync(Doctor doctor)
+    public async Task<Doctor> AddDoctorAsync(Doctor doctor)
     {
-        await _unitOfWork.DoctorRepository.InsertAsync(doctor);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.DoctorRepository.InsertAsync(doctor);
     }
 
-    public async Task UpdateDoctorAsync(Doctor doctor)
+    public async Task<Doctor> UpdateDoctorAsync(Doctor doctor)
     {
-        await _unitOfWork.DoctorRepository.UpdateAsync(doctor);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.DoctorRepository.UpdateAsync(doctor);
     }
 
     public async Task DeleteDoctorAsync(Doctor doctor)

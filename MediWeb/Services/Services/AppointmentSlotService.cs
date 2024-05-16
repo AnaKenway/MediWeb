@@ -22,22 +22,18 @@ public class AppointmentSlotService
         return await _unitOfWork.AppointmentSlotRepository.GetByIdAsync(id);
     }
 
-    public async Task AddAppointmentSlotAsync(AppointmentSlot appointmentSlot)
+    public async Task<AppointmentSlot> AddAppointmentSlotAsync(AppointmentSlot appointmentSlot)
     {
-        await _unitOfWork.AppointmentSlotRepository.InsertAsync(appointmentSlot);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.AppointmentSlotRepository.InsertAsync(appointmentSlot);
     }
 
-    public async Task UpdateAppointmentSlotAsync(AppointmentSlot appointmentSlot)
+    public async Task<AppointmentSlot> UpdateAppointmentSlotAsync(AppointmentSlot appointmentSlot)
     {
-        await _unitOfWork.AppointmentSlotRepository.UpdateAsync(appointmentSlot);
-        await _unitOfWork.SaveAsync();
+       return await _unitOfWork.AppointmentSlotRepository.UpdateAsync(appointmentSlot);
     }
 
     public async Task DeleteAppointmentSlotAsync(AppointmentSlot appointmentSlot)
     {
         await _unitOfWork.AppointmentSlotRepository.DeleteAsync(appointmentSlot);
-        await _unitOfWork.SaveAsync();
-
     }
 }

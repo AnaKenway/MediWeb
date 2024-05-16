@@ -22,22 +22,18 @@ public class SpecializationService
         return await _unitOfWork.SpecializationRepository.GetByIdAsync(id);
     }
 
-    public async Task AddSpecializationAsync(Specialization specialization)
+    public async Task<Specialization> AddSpecializationAsync(Specialization specialization)
     {
-        await _unitOfWork.SpecializationRepository.InsertAsync(specialization);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.SpecializationRepository.InsertAsync(specialization);
     }
 
-    public async Task UpdateSpecializationAsync(Specialization specialization)
+    public async Task<Specialization> UpdateSpecializationAsync(Specialization specialization)
     {
-        await _unitOfWork.SpecializationRepository.UpdateAsync(specialization);
-        await _unitOfWork.SaveAsync();
+        return await _unitOfWork.SpecializationRepository.UpdateAsync(specialization);
     }
 
     public async Task DeleteSpecializationAsync(Specialization specialization)
     {
         await _unitOfWork.SpecializationRepository.DeleteAsync(specialization);
-        await _unitOfWork.SaveAsync();
-
     }
 }
