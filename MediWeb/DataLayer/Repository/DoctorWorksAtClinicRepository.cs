@@ -31,5 +31,15 @@ namespace DataLayer.Repository
         {
             return await _context.DoctorWorksAtClinics.Where(dwc => dwc.ClinicId == clinicId).Select(dwc => dwc.Doctor).ToListAsync();
         }
+
+        public IList<Doctor> GetAllDoctorsWhoWorkAtClinicById(long clinicId)
+        {
+            return _context.DoctorWorksAtClinics.Where(dwc => dwc.ClinicId == clinicId).Select(dwc => dwc.Doctor).ToList();
+        }
+
+        public IList<Clinic> GetAllClinicWhereDoctorWorksById(long doctorId)
+        {
+            return _context.DoctorWorksAtClinics.Where(dwc => dwc.DoctorId == doctorId).Select(dwc => dwc.Clinic).ToList();
+        }
     }
 }
