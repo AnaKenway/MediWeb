@@ -1,6 +1,6 @@
 ﻿namespace Common;
 
-public static class ExtensionMethods
+public static class NullExtensionMethods
 {
     public static bool IsNullOrEmpty(this string value)
         => string.IsNullOrEmpty(value);
@@ -28,5 +28,11 @@ public static class ExtensionMethods
     {
         if (value.IsNullOrEmpty())
             throw new ArgumentException("The passed string value is null or whitespace.", nameof(value));
+    }
+
+    public static void AssertIsNotNull(this object value)
+    {
+        if (value == null)
+            throw new ArgumentException("The passed object is null.", nameof(value));
     }
 }

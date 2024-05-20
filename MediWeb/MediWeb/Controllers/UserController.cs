@@ -1,12 +1,34 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataLayer;
+using MediWeb.Model;
+using MediWeb.Models;
+using MediWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediWeb.Controllers
 {
     public class UserController : Controller
     {
+        public UnitOfWork _unitOfWork;
+        public UserAccountService _userAccountService;    
+        public PatientService _patientService;
+
+        public UserController(UnitOfWork unitOfWork, UserAccountService userAccountService, PatientService patientService) 
+        { 
+            _unitOfWork = unitOfWork;
+            _userAccountService = userAccountService;
+            _patientService = patientService;
+        }
+
         // GET: UserController
-        public ActionResult Index()
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel loginData)
         {
             return View();
         }
@@ -17,25 +39,22 @@ namespace MediWeb.Controllers
             return View();
         }
 
-        // GET: UserController/Create
-        public ActionResult Create()
+        // GET: UserController/Register
+        public ActionResult Register()
         {
             return View();
         }
 
-        // POST: UserController/Create
+        // POST: UserController/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Register(RegisterViewModel registerUserData)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if(!ModelState.IsValid)
+                return View(registerUserData);
+            var userAccount = await _userAccountService.AddUserAccountAsync(registerUserData.CreateUserAccount());
+            await _patientService.AddPatientAsync(registerUserData.CreatePatient(userAccount));
+            return View();
         }
 
         // GET: UserController/Edit/5

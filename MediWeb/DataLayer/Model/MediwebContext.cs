@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DataLayer.EntityModels;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
-namespace DataLayer;
+namespace DataLayer.Model;
 
-public partial class MediWebContext : DbContext
+public partial class MediwebContext : DbContext
 {
-    public MediWebContext()
+    public MediwebContext()
     {
     }
 
-    public MediWebContext(DbContextOptions<MediWebContext> options)
+    public MediwebContext(DbContextOptions<MediwebContext> options)
         : base(options)
     {
     }
@@ -199,7 +200,7 @@ public partial class MediWebContext : DbContext
             entity.Property(e => e.ClinicId).HasColumnName("clinic_id");
             entity.Property(e => e.UserAccountId).HasColumnName("user_account_id");
 
-            entity.HasOne(d => d.Clinic).WithMany(p => p.MedicalStaff)
+            entity.HasOne(d => d.Clinic).WithMany(p => p.MedicalStaffs)
                 .HasForeignKey(d => d.ClinicId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("medical_staff_clinic_fkey");
