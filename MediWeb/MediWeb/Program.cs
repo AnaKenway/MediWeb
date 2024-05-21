@@ -1,5 +1,6 @@
 using DataLayer;
 using MediWeb.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,19 @@ builder.Services.AddRazorComponents();
 //Add DBContext
 builder.Services.AddDbContext<MediWebContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+           .AddEntityFrameworkStores<MediWebContext>()
+           .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 3;
+});
 
 //Add Unit of Work
 builder.Services.AddScoped<UnitOfWork>();

@@ -2,6 +2,7 @@
 using MediWeb.Model;
 using MediWeb.Models;
 using MediWeb.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediWeb.Controllers
@@ -11,15 +12,20 @@ namespace MediWeb.Controllers
         public UnitOfWork _unitOfWork;
         public UserAccountService _userAccountService;    
         public PatientService _patientService;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public UserController(UnitOfWork unitOfWork, UserAccountService userAccountService, PatientService patientService) 
+        public UserController(UnitOfWork unitOfWork, UserAccountService userAccountService, PatientService patientService,
+            UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) 
         { 
             _unitOfWork = unitOfWork;
             _userAccountService = userAccountService;
             _patientService = patientService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        // GET: UserController
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -28,9 +34,21 @@ namespace MediWeb.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel loginData)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+
+            return View(model);
         }
 
         // GET: UserController/Details/5

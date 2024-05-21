@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DataLayer.EntityModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataLayer;
 
